@@ -3,3 +3,4 @@
 2. step into the folder that was just downloaded continue stepping into the debug folder until you hit the exe and run that.
   You must have c# libraries downloaded onto you computer including .net framework 4.6.1
   
+3. for access to the appveyor CI tool : https://ci.appveyor.com/project/MichaelBatbouta/jsonmapper
