@@ -12,3 +12,6 @@ A:\1 UML\soft_eng_2\JSON_Mapper\JSON_Mapper\obj\Debug\JSON_Mapper.Properties.Res
 A:\1 UML\soft_eng_2\JSON_Mapper\JSON_Mapper\obj\Debug\JSON_Mapper.csproj.GenerateResource.Cache
 A:\1 UML\soft_eng_2\JSON_Mapper\JSON_Mapper\obj\Debug\JSON_Mapper.exe
 A:\1 UML\soft_eng_2\JSON_Mapper\JSON_Mapper\obj\Debug\JSON_Mapper.pdb
+C:\Users\mbatb\Documents\JSONMapper\JSON_Mapper\bin\Debug\JSON_Mapper.exe.config
+C:\Users\mbatb\Documents\JSONMapper\JSON_Mapper\obj\Debug\JSON_Mapper.exe
+C:\Users\mbatb\Documents\JSONMapper\JSON_Mapper\obj\Debug\JSON_Mapper.pdb
