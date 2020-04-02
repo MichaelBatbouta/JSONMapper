@@ -62,7 +62,7 @@ namespace JSON_Mapper
                     {
                     if( child.Count > count )
                     {
-                        count = child.Count;
+                        count = child.Count + 1;
                     }
                 }
             }
