@@ -45,3 +45,6 @@ C:\Users\Justin_Dom\Documents\Projects\JSONMapper\JSON_Mapper\obj\Debug\JSON_Map
 C:\Users\Justin_Dom\Documents\Projects\JSONMapper\JSON_Mapper\obj\Debug\JSON_Mapper.exe
 C:\Users\Justin_Dom\Documents\Projects\JSONMapper\JSON_Mapper\obj\Debug\JSON_Mapper.pdb
 >>>>>>> d90014808627f97d1bee080b46dcd3639cd7d6a0
+C:\Users\Justin_Dom\Documents\Projects\JSONMapper\JSON_Mapper\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Justin_Dom\Documents\Projects\JSONMapper\JSON_Mapper\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Justin_Dom\Documents\Projects\JSONMapper\JSON_Mapper\obj\Debug\JSON_Mapper.csproj.CopyComplete

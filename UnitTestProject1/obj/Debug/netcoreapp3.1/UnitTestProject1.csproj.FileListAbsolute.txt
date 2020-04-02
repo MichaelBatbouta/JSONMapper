@@ -84,9 +84,9 @@ C:\Users\Justin_Dom\Documents\Projects\JSONMapper\UnitTestProject1\bin\Debug\net
 C:\Users\Justin_Dom\Documents\Projects\JSONMapper\UnitTestProject1\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.TestPlatform.CommunicationUtilities.resources.dll
 C:\Users\Justin_Dom\Documents\Projects\JSONMapper\UnitTestProject1\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.TestPlatform.CrossPlatEngine.resources.dll
 C:\Users\Justin_Dom\Documents\Projects\JSONMapper\UnitTestProject1\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
-C:\Users\Justin_Dom\Documents\Projects\JSONMapper\UnitTestProject1\obj\Debug\netcoreapp3.1\UnitTestProject1.csprojAssemblyReference.cache
 C:\Users\Justin_Dom\Documents\Projects\JSONMapper\UnitTestProject1\obj\Debug\netcoreapp3.1\UnitTestProject1.AssemblyInfoInputs.cache
 C:\Users\Justin_Dom\Documents\Projects\JSONMapper\UnitTestProject1\obj\Debug\netcoreapp3.1\UnitTestProject1.AssemblyInfo.cs
 C:\Users\Justin_Dom\Documents\Projects\JSONMapper\UnitTestProject1\obj\Debug\netcoreapp3.1\UnitTestProject1.csproj.CopyComplete
 C:\Users\Justin_Dom\Documents\Projects\JSONMapper\UnitTestProject1\obj\Debug\netcoreapp3.1\UnitTestProject1.dll
 C:\Users\Justin_Dom\Documents\Projects\JSONMapper\UnitTestProject1\obj\Debug\netcoreapp3.1\UnitTestProject1.pdb
+C:\Users\Justin_Dom\Documents\Projects\JSONMapper\UnitTestProject1\obj\Debug\netcoreapp3.1\UnitTestProject1.csprojAssemblyReference.cache
