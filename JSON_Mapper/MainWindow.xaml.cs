@@ -80,7 +80,32 @@ namespace JSON_Mapper
             }
         }
 
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+           // LoadJson();
+            var gridView = new GridView();
+            this.listView.View = gridView;
+            gridView.Columns.Add(new GridViewColumn
+            {
+                Header = "Id",
+                DisplayMemberBinding = new Binding("Id")
+            });
+            gridView.Columns.Add(new GridViewColumn
+            {
+                Header = "Name",
+                DisplayMemberBinding = new Binding("Name")
+            });
 
+            // Populate list
+            this.listView.Items.Add(new MyItem { Id = 1, Name = "David" });
+        }
+
+        public class MyItem
+        {
+            public int Id { get; set; }
+
+            public string Name { get; set; }
+        }
 
     }
 }

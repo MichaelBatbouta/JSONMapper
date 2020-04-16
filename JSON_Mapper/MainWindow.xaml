@@ -20,23 +20,18 @@
                 <Separator></Separator>
                 <MenuItem Header="Exit"></MenuItem>
             </MenuItem>
-            <MenuItem Header="Edit"></MenuItem>
+            <MenuItem Header="Edit" Click="MenuItem_Click"></MenuItem>
         </Menu>
-        <TabControl Grid.Row="1" Margin="10,0,-10,0">
-            <TabItem Header="Document Flow" >
-                <Grid>
-                    <TextBlock Text="This is where the outline of the entire document will be placed."/>
-                    <Canvas></Canvas>
-                    <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Preview">
-                This is where the preview will be drawn to screen.
-            </TabItem>
-        </TabControl>
 
         <StatusBar Grid.Row="2">
             Items
         </StatusBar>
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="241" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="497">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
