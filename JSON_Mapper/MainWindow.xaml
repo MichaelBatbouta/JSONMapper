@@ -26,7 +26,7 @@
         <StatusBar Grid.Row="2">
             Items
         </StatusBar>
-        <ListView x:Name="listView" HorizontalAlignment="Left" Height="241" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="497">
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="241" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="497" SelectionChanged="listView_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>

@@ -82,23 +82,75 @@ namespace JSON_Mapper
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-           // LoadJson();
             var gridView = new GridView();
             this.listView.View = gridView;
+            int i = 0;
+            string text = System.IO.File.ReadAllText("TestJson.txt");
+            JsonTextReader reader = new JsonTextReader(new StringReader(text));
+            JsonColumn test = new JsonColumn { Property = "", Value = "" };
+
+            while (reader.TokenType.ToString() != "String")
+            {
+                reader.Read();
+                
+                if (reader.TokenType.ToString() == "PropertyName")
+                {
+                    test.Property = reader.Value.ToString();
+                } else if (reader.TokenType.ToString() == "String")
+                {
+                    test.Value = reader.Value.ToString();
+                }
+
+
+            }
+
             gridView.Columns.Add(new GridViewColumn
             {
-                Header = "Id",
-                DisplayMemberBinding = new Binding("Id")
-            });
-            gridView.Columns.Add(new GridViewColumn
-            {
-                Header = "Name",
-                DisplayMemberBinding = new Binding("Name")
+                Header = "Property",
+                DisplayMemberBinding = new Binding("Property")
             });
 
-            // Populate list
-            this.listView.Items.Add(new MyItem { Id = 1, Name = "David" });
+            this.listView.Items.Add(test);
+
         }
+
+            /*while (reader.TokenType.ToString() != "Int")
+            {
+                reader.Read();
+
+                if (reader.TokenType.ToString() == "PropertyName")
+                {
+                    test2.Property = reader.Value.ToString();
+                }
+                else if (reader.TokenType.ToString() == "Int")
+                {
+                    test2.Value = reader.Value.ToString();
+                }
+
+                i++;
+            }*/
+
+
+        /* private void MenuItem_Click(object sender, RoutedEventArgs e)
+         {
+            // LoadJson();
+             var gridView = new GridView();
+             this.listView.View = gridView;
+             gridView.Columns.Add(new GridViewColumn
+             {
+                 Header = "Id",
+                 DisplayMemberBinding = new Binding("Id")
+             });
+             gridView.Columns.Add(new GridViewColumn
+             {
+                 Header = "Name",
+                 DisplayMemberBinding = new Binding("Name")
+             });
+
+             // Populate list
+             this.listView.Items.Add(new MyItem { Id = 1, Name = "David" });
+         }*/
+
 
         public class MyItem
         {
@@ -107,5 +159,26 @@ namespace JSON_Mapper
             public string Name { get; set; }
         }
 
+        public class JsonColumn
+        {
+            public string Property { get; set; }
+
+            public string Value { get; set; }
+        }
+
+        private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            JsonColumn test = (JsonColumn) this.listView.SelectedItem;
+
+            GridView gridView = (GridView) this.listView.View;
+
+            gridView.Columns.Add(new GridViewColumn
+            {
+                Header = "Value",
+                DisplayMemberBinding = new Binding("Value")
+            });
+
+           
+        }
     }
 }
