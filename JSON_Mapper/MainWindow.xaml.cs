@@ -145,7 +145,12 @@ namespace JSON_Mapper
                 DisplayMemberBinding = new Binding("Property")
             });
 
-            this.listView.Items.Add(new JsonColumn {Property = masterTree.data[0].property, Value = masterTree.data[0].values[0] } );
+            foreach(JsonTreeObject j in masterTree.data)
+            {
+                this.listView.Items.Add((new JsonColumn { Property = j.property, Value = j.values[0] } ));
+
+            }
+            //this.listView.Items.Add(new JsonColumn {Property = masterTree.data[0].property, Value = masterTree.data[0].values[0 } );
             
 
         }
