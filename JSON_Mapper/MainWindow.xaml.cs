@@ -25,6 +25,10 @@ namespace JSON_Mapper
     /// </summary>
     public partial class MainWindow : Window
     {
+        private int depthTracker = 0;
+        JsonTreeWrapper masterTree = new JsonTreeWrapper();
+        Dictionary<String, String> headerDictionary = new Dictionary<string, string>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -89,7 +93,7 @@ namespace JSON_Mapper
             JsonTextReader reader = new JsonTextReader(new StringReader(text));
             JsonColumn test = new JsonColumn { Property = "", Value = "" };
 
-            JsonTreeWrapper masterTree = new JsonTreeWrapper();
+            
             String jProp = "", jVal = "";
             List<String> jValList = new List<String>();
             bool arrayFlag = false;
@@ -145,52 +149,30 @@ namespace JSON_Mapper
                 DisplayMemberBinding = new Binding("Property")
             });
 
-            foreach(JsonTreeObject j in masterTree.data)
+            gridView.Columns.Add(new GridViewColumn
             {
-                this.listView.Items.Add((new JsonColumn { Property = j.property, Value = j.values[0] } ));
+                Header = "Value",
+                DisplayMemberBinding = new Binding("Value")
+            });
+
+   
+            foreach (JsonTreeObject j in masterTree.data)
+            {
+                if(j.isArray)
+                {
+                    this.listView.Items.Add((new JsonColumn { Property = j.property, Value = "Array" }));
+                }
+                else
+                {
+                    this.listView.Items.Add((new JsonColumn { Property = j.property, Value = j.values[0] }));
+                }
+                
 
             }
-            //this.listView.Items.Add(new JsonColumn {Property = masterTree.data[0].property, Value = masterTree.data[0].values[0 } );
             
 
         }
 
-            /*while (reader.TokenType.ToString() != "Int")
-            {
-                reader.Read();
-
-                if (reader.TokenType.ToString() == "PropertyName")
-                {
-                    test2.Property = reader.Value.ToString();
-                }
-                else if (reader.TokenType.ToString() == "Int")
-                {
-                    test2.Value = reader.Value.ToString();
-                }
-
-                i++;
-            }*/
-
-
-        /* private void MenuItem_Click(object sender, RoutedEventArgs e)
-         {
-            // LoadJson();
-             var gridView = new GridView();
-             this.listView.View = gridView;
-             gridView.Columns.Add(new GridViewColumn
-             {
-                 Header = "Id",
-                 DisplayMemberBinding = new Binding("Id")
-             });
-             gridView.Columns.Add(new GridViewColumn
-             {
-                 Header = "Name",
-                 DisplayMemberBinding = new Binding("Name")
-             });
-
-             // Populate list
-             this.listView.Items.Add(new MyItem { Id = 1, Name = "David" });
-         }*/
 
 
         public class JsonTreeWrapper
@@ -211,6 +193,20 @@ namespace JSON_Mapper
                 {
                     obj.printTreeObject();
                 }
+            }
+
+            public JsonTreeObject findJsonTreeObject(String key)
+            {
+                foreach(JsonTreeObject obj in data)
+                {
+                    if(obj.property == key)
+                    {
+                        return obj;
+                    }
+
+                }
+
+                return null;
             }
             
 
@@ -270,19 +266,52 @@ namespace JSON_Mapper
             public string Value { get; set; }
         }
 
+        private void AddColumn(ListView lv, string title, int width)
+        {
+            GridViewColumnHeader column = new GridViewColumnHeader();
+          //  column.TextInput = title;
+            column.Width = width;
+            //lv.Columns.Add(column);
+        }
+
+
         private void listView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            JsonColumn test = (JsonColumn) this.listView.SelectedItem;
+            JsonColumn test = (JsonColumn)this.listView.SelectedItem;
 
+            Console.WriteLine(test.Property);
             GridView gridView = (GridView) this.listView.View;
+
+            JsonTreeObject j = masterTree.findJsonTreeObject(test.Property);
+            if (j.isArray)
+            {
+                foreach(String v in j.values)
+                {
+                    this.listView.Items.Add((new JsonColumn { Property = j.property, Value = v }));
+                }
+                
+            }
+            else
+            {
+                this.listView.Items.Add((new JsonColumn { Property = j.property, Value = j.values[0] }));
+            }
 
             gridView.Columns.Add(new GridViewColumn
             {
-                Header = "Value",
-                DisplayMemberBinding = new Binding("Value")
+                Header = "Property" + depthTracker.ToString(),
+                DisplayMemberBinding = new Binding("Property" + depthTracker.ToString())
             });
 
-           
+            gridView.Columns.Add(new GridViewColumn
+            {
+                Header = "Value" + depthTracker.ToString(),
+                DisplayMemberBinding = new Binding("Value" + depthTracker.ToString())
+            });
+
+            depthTracker++;
+
+
+
         }
     }
 }
