@@ -390,5 +390,12 @@ namespace JSON_Mapper
                 this.listView2.Items.Add((new JsonColumn { Property = "[1]", Value = "yellow" }));
             }
         }
+
+        private void listView2_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            JsonColumn test = (JsonColumn)this.listView2.SelectedItem;
+
+            masterPath = masterPath + test.Value;
+        }
     }
 }
