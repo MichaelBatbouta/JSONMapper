@@ -25,7 +25,7 @@ namespace JSON_Mapper
     /// </summary>
     public partial class MainWindow : Window
     {
-        private int depthTracker = 0;
+        private int depthTracker = 2;
         JsonTreeWrapper masterTree = new JsonTreeWrapper();
         Dictionary<String, String> headerDictionary = new Dictionary<string, string>();
 
@@ -266,6 +266,20 @@ namespace JSON_Mapper
             public string Value { get; set; }
         }
 
+        public class JsonColumn2
+        {
+            public string Property2 { get; set; }
+
+            public string Value2 { get; set; }
+        }
+
+        public class JsonColumn3
+        {
+            public string Property3 { get; set; }
+
+            public string Value3 { get; set; }
+        }
+
         private void AddColumn(ListView lv, string title, int width)
         {
             GridViewColumnHeader column = new GridViewColumnHeader();
@@ -280,33 +294,37 @@ namespace JSON_Mapper
             JsonColumn test = (JsonColumn)this.listView.SelectedItem;
 
             Console.WriteLine(test.Property);
-            GridView gridView = (GridView) this.listView.View;
+            GridView gridView = new GridView();
+            this.listView1.View = gridView;
+           //gridView = (GridView) this.listView1.View;
+
+            gridView.Columns.Add(new GridViewColumn
+            {
+                Header = "Property",
+                DisplayMemberBinding = new Binding("Property")
+            });
+
+            gridView.Columns.Add(new GridViewColumn
+            {
+                Header = "Value",
+                DisplayMemberBinding = new Binding("Value")
+            });
 
             JsonTreeObject j = masterTree.findJsonTreeObject(test.Property);
             if (j.isArray)
             {
                 foreach(String v in j.values)
                 {
-                    this.listView.Items.Add((new JsonColumn { Property = j.property, Value = v }));
+                    this.listView1.Items.Add((new JsonColumn { Property = j.property, Value = v }));
                 }
                 
             }
             else
             {
-                this.listView.Items.Add((new JsonColumn { Property = j.property, Value = j.values[0] }));
+                this.listView1.Items.Add((new JsonColumn { Property = j.property, Value = j.values[0] }));
             }
 
-            gridView.Columns.Add(new GridViewColumn
-            {
-                Header = "Property" + depthTracker.ToString(),
-                DisplayMemberBinding = new Binding("Property" + depthTracker.ToString())
-            });
 
-            gridView.Columns.Add(new GridViewColumn
-            {
-                Header = "Value" + depthTracker.ToString(),
-                DisplayMemberBinding = new Binding("Value" + depthTracker.ToString())
-            });
 
             depthTracker++;
 
