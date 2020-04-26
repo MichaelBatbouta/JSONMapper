@@ -98,42 +98,58 @@ namespace JSON_Mapper
             String jProp = "", jVal = "";
             List<String> jValList = new List<String>();
             bool arrayFlag = false;
+            bool ignoreflag = false;
 
             //Parse JSON
             while (reader.Read())
             {
-                //If a property type save value 
-                if (reader.TokenType.ToString() == "PropertyName")
+                if(i != 0 && reader.TokenType.ToString() == "StartObject")
                 {
-                    //test.Property = reader.Value.ToString();
-                    jProp = reader.Value.ToString();
+                    ignoreflag = true;
                 }
-                //if a string value, set it and add to master tree
-                else if (reader.TokenType.ToString() == "String" || reader.TokenType.ToString() == "Integer")
+                if (reader.TokenType.ToString() == "EndObject")
                 {
-                    if (!arrayFlag)
+                    ignoreflag = false;
+                }
+                if (ignoreflag == false)
+                {
+                    //If a property type save value 
+                    if (reader.TokenType.ToString() == "PropertyName")
                     {
-                        //test.Value = reader.Value.ToString();
-                        jVal = reader.Value.ToString();
-                        masterTree.addObject(new JsonTreeObject(jProp, jVal));
-                        jProp = "";
-                        jVal = "";
+                        //test.Property = reader.Value.ToString();
+                        jProp = reader.Value.ToString();
                     }
-                    else
+                    //if a string value, set it and add to master tree
+                    else if (reader.TokenType.ToString() == "String" || reader.TokenType.ToString() == "Integer")
                     {
-                        jValList.Add(reader.Value.ToString());
+                        if (!arrayFlag)
+                        {
+                            //test.Value = reader.Value.ToString();
+                            jVal = reader.Value.ToString();
+                            masterTree.addObject(new JsonTreeObject(jProp, jVal));
+                            jProp = "";
+                            jVal = "";
+                        }
+                        else
+                        {
+                            jValList.Add(reader.Value.ToString());
+                        }
                     }
+                    else if (reader.TokenType.ToString() == "StartArray")
+                    {
+                        arrayFlag = true;
+                    }
+                    else if (reader.TokenType.ToString() == "EndArray")
+                    {
+                        masterTree.addObject(new JsonTreeObject(jProp, jValList));
+                        arrayFlag = false;
+                        jValList.Clear();
+                    }
+                   
+
                 }
-                else if (reader.TokenType.ToString() == "StartArray")
-                {
-                    arrayFlag = true;
-                }
-                else if (reader.TokenType.ToString() == "EndArray")
-                {
-                    masterTree.addObject(new JsonTreeObject(jProp, jValList));
-                    arrayFlag = false;
-                    jValList.Clear();
-                }
+
+                i++;
 
 
             }
@@ -170,7 +186,7 @@ namespace JSON_Mapper
                 
 
             }
-            
+            this.listView.Items.Add((new JsonColumn { Property = "other", Value = "Object" }));
 
         }
 
@@ -297,38 +313,48 @@ namespace JSON_Mapper
 
             Console.WriteLine(test.Property);
             GridView gridView = new GridView();
-
-            
+  
             this.listView1.View = gridView;
             //gridView = (GridView) this.listView1.View;
 
 
             masterPath = masterPath + test.Property;
-            gridView.Columns.Add(new GridViewColumn
-            {
-                Header = "Property",
-                DisplayMemberBinding = new Binding("Property")
-            });
+           
 
-            gridView.Columns.Add(new GridViewColumn
+            if(test.Property == "other")
             {
-                Header = "Value",
-                DisplayMemberBinding = new Binding("Value")
-            });
-
-            JsonTreeObject j = masterTree.findJsonTreeObject(test.Property);
-            if (j.isArray)
-            {
-                foreach(String v in j.values)
+                gridView.Columns.Add(new GridViewColumn
                 {
-                    this.listView1.Items.Add((new JsonColumn { Property = j.property, Value = v }));
-                }
-                
+                    Header = "Property",
+                    DisplayMemberBinding = new Binding("Property")
+                });
+
+                gridView.Columns.Add(new GridViewColumn
+                {
+                    Header = "Value",
+                    DisplayMemberBinding = new Binding("Value")
+                });
+                this.listView1.Items.Add((new JsonColumn { Property = "weather" , Value = "bad" }));
+                this.listView1.Items.Add((new JsonColumn { Property = "otherlist", Value = "Array"}));
             }
+
             else
             {
-                this.listView1.Items.Add((new JsonColumn { Property = j.property, Value = j.values[0] }));
+                JsonTreeObject j = masterTree.findJsonTreeObject(test.Property);
+                if (j.isArray)
+                {
+                    foreach (String v in j.values)
+                    {
+                        this.listView1.Items.Add((new JsonColumn { Property = j.property, Value = v }));
+                    }
+
+                }
+                else
+                {
+                    this.listView1.Items.Add((new JsonColumn { Property = j.property, Value = j.values[0] }));
+                }
             }
+
 
 
             
@@ -336,6 +362,33 @@ namespace JSON_Mapper
 
 
 
+        }
+
+        private void listView1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            JsonColumn test = (JsonColumn)this.listView1.SelectedItem;
+            GridView gridView2 = new GridView();
+
+            this.listView2.View = gridView2;
+
+            masterPath = masterPath + test.Property;
+
+            if (test.Property == "otherlist")
+            {
+                gridView2.Columns.Add(new GridViewColumn
+                {
+                    Header = "Property",
+                    DisplayMemberBinding = new Binding("Property")
+                });
+
+                gridView2.Columns.Add(new GridViewColumn
+                {
+                    Header = "Value",
+                    DisplayMemberBinding = new Binding("Value")
+                });
+                this.listView2.Items.Add((new JsonColumn { Property = "otherlist", Value = "red" }));
+                this.listView2.Items.Add((new JsonColumn { Property = "otherlist", Value = "yellow" }));
+            }
         }
     }
 }
