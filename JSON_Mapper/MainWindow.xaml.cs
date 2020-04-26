@@ -386,8 +386,8 @@ namespace JSON_Mapper
                     Header = "Value",
                     DisplayMemberBinding = new Binding("Value")
                 });
-                this.listView2.Items.Add((new JsonColumn { Property = "otherlist", Value = "red" }));
-                this.listView2.Items.Add((new JsonColumn { Property = "otherlist", Value = "yellow" }));
+                this.listView2.Items.Add((new JsonColumn { Property = "[0]", Value = "red" }));
+                this.listView2.Items.Add((new JsonColumn { Property = "[1]", Value = "yellow" }));
             }
         }
     }
