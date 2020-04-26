@@ -28,6 +28,7 @@ namespace JSON_Mapper
         private int depthTracker = 2;
         JsonTreeWrapper masterTree = new JsonTreeWrapper();
         Dictionary<String, String> headerDictionary = new Dictionary<string, string>();
+        String masterPath = "";
 
         public MainWindow()
         {
@@ -218,6 +219,7 @@ namespace JSON_Mapper
             public String property;
             public List<String> values = new List<string>();
             public bool isArray;
+            public bool hasChild;
 
             public JsonTreeObject(String p, String v)
             {
@@ -295,9 +297,13 @@ namespace JSON_Mapper
 
             Console.WriteLine(test.Property);
             GridView gridView = new GridView();
-            this.listView1.View = gridView;
-           //gridView = (GridView) this.listView1.View;
 
+            
+            this.listView1.View = gridView;
+            //gridView = (GridView) this.listView1.View;
+
+
+            masterPath = masterPath + test.Property;
             gridView.Columns.Add(new GridViewColumn
             {
                 Header = "Property",
@@ -325,7 +331,7 @@ namespace JSON_Mapper
             }
 
 
-
+            
             depthTracker++;
 
 
