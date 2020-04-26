@@ -1,0 +1,11 @@
+{
+  "name": "Justin",
+  "age": 22,
+  "field": "Computer Science",
+  "other": {
+    "pp": "hard"
+  },"somelist": [
+    "blue",
+    "green"
+  ]
+}
