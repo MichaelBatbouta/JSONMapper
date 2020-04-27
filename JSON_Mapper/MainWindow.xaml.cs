@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -90,7 +91,18 @@ namespace JSON_Mapper
             var gridView = new GridView();
             this.listView.View = gridView;
             int i = 0;
-            string text = System.IO.File.ReadAllText("test.json");
+
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            //openFileDialog1.InitialDirectory = "c:\\";
+            openFileDialog1.ShowDialog();
+            
+            string selectedFileName = openFileDialog1.FileName;
+
+            
+             
+           
+            string text = System.IO.File.ReadAllText(selectedFileName);
             JsonTextReader reader = new JsonTextReader(new StringReader(text));
             JsonColumn test = new JsonColumn { Property = "", Value = "" };
 
@@ -316,12 +328,12 @@ namespace JSON_Mapper
   
             this.listView1.View = gridView;
             //gridView = (GridView) this.listView1.View;
+            masterPath = "";
 
-
-            masterPath = masterPath + test.Property;
-           
-
-            if(test.Property == "other")
+            masterPath = masterPath + "\"[" + test.Property + "\"]";
+            textBox.Text = "";
+            textBox.Text = masterPath;
+            if (test.Property == "other")
             {
                 gridView.Columns.Add(new GridViewColumn
                 {
@@ -371,8 +383,9 @@ namespace JSON_Mapper
 
             this.listView2.View = gridView2;
 
-            masterPath = masterPath + test.Property;
-
+            masterPath = masterPath + "\"[" + test.Property + "\"]";
+            textBox.Text = "";
+            textBox.Text = masterPath;
             if (test.Property == "otherlist")
             {
                 gridView2.Columns.Add(new GridViewColumn
@@ -394,8 +407,9 @@ namespace JSON_Mapper
         private void listView2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             JsonColumn test = (JsonColumn)this.listView2.SelectedItem;
-
-            masterPath = masterPath + test.Value;
+            masterPath = masterPath + "\"["+ test.Property + "\"]";
+            textBox.Text = "";
+            textBox.Text = masterPath;
         }
     }
 }

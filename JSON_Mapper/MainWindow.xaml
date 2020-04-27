@@ -20,20 +20,20 @@
                 <Separator></Separator>
                 <MenuItem Header="Exit"></MenuItem>
             </MenuItem>
-            <MenuItem Header="Edit" Click="MenuItem_Click"></MenuItem>
+            <MenuItem Header="Select File" Click="MenuItem_Click"></MenuItem>
         </Menu>
 
         <StatusBar Grid.Row="2">
             Items
         </StatusBar>
-        <ListView x:Name="listView" HorizontalAlignment="Left" Height="241" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="169" SelectionChanged="listView_SelectionChanged">
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="215" Margin="10,36,0,0" Grid.Row="1" VerticalAlignment="Top" Width="169" SelectionChanged="listView_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView x:Name="listView1" HorizontalAlignment="Left" Height="241" Margin="179,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="174" SelectionChanged="listView1_SelectionChanged" RenderTransformOrigin="0.5,0.5">
+        <ListView x:Name="listView1" HorizontalAlignment="Left" Height="216" Margin="179,35,0,0" Grid.Row="1" VerticalAlignment="Top" Width="174" SelectionChanged="listView1_SelectionChanged" RenderTransformOrigin="0.5,0.5">
             <ListView.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -48,12 +48,13 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView x:Name="listView2" HorizontalAlignment="Left" Height="241" Margin="353,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="164" SelectionChanged="listView2_SelectionChanged">
+        <ListView x:Name="listView2" HorizontalAlignment="Left" Height="215" Margin="353,36,0,0" Grid.Row="1" VerticalAlignment="Top" Width="164" SelectionChanged="listView2_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
             </ListView.View>
         </ListView>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="10,8,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="342"/>
     </Grid>
 </Window>
