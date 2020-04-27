@@ -34,6 +34,7 @@ namespace JSON_Mapper
         public MainWindow()
         {
             InitializeComponent();
+            textBox.Text = "";
         }
 
         private void button_Click(object sender, RoutedEventArgs e)
@@ -407,7 +408,7 @@ namespace JSON_Mapper
         private void listView2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             JsonColumn test = (JsonColumn)this.listView2.SelectedItem;
-            masterPath = masterPath + "\"["+ test.Property + "\"]";
+            masterPath = masterPath + "\"["+ test.Value + "\"]";
             textBox.Text = "";
             textBox.Text = masterPath;
         }
